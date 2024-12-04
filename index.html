@@ -3,108 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+    <title>Parcial 3 de Progress Tracking</title>
+=======
     <title>Document</title>
+>>>>>>> 78db8d71c545cb9de880b9c2ac8df56d39abb6d5
 </head>
 <body>
-    <h1>Parcial 3 de progress_tracking</h1>
-
-    <P>import time</P>
-    <P>import sqlite3 as sql</P>
-
-    <P>def createDB():</P>
-    <P> conn = sql.connect("autoconocimiento.db")</P>
-    <P>print("base de datos autoconocimiento creada")</P>
-    <P>conn.commit()</P>
-    <P>conn.close()</P>
-
-    <P>def createTable():</P>
-    <P>    coon = sql.connect("autoconocimiento.db")</P>
-    <P>   cursor = coon.cursor()</P>
-    <P>   cursor.execute(""" CREATE TABLE progress_tracking (</P>
-    <P>  tracking_id INTEGER PRIMARY KEY AUTOINCREMENT,</P>
-    <P>   experience_id INTEGER,</P>
-    <P>  experience_type TEXT,  -- 'growth' or 'contribution'</P>
-    <P>   milestone TEXT,</P>
-    <P>   completion_percentage INTEGER DEFAULT 0,</P>
-    <P>  notes TEXT,</P>
-    <P>  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</P>
-    <P>   FOREIGN KEY (experience_id) REFERENCES growth_experiences(growth_id)</P>
-    <P>   );</P>
-    <P>   """)</P>
-
-    <P>  print("tabla creada")</P>
-
-
-    <P> coon.commit()</P>
-    <P>  coon.close()</P>
-    <img src="primer.JPG" alt="300">
-
-   <P> def insertRow(id_experiencia, tipo_experiencia, experiencia, porcentaje, notas):</P>
-    <P> coon = sql.connect("autoconocimiento.db")</P>
-    <P> cursor = coon.cursor()</P>
-    <P>   instruccion =  """</P>
-    <P>   INSERT INTO progress_tracking </P>
-    <P>   (experience_id, experience_type, milestone, completion_percentage, notes) </P>
-    <P>   VALUES (?, ?, ?, ?, ?)</P>
-    <P>    """
-    <P>    cursor.execute(instruccion, (id_experiencia, tipo_experiencia, experiencia, porcentaje, notas))</P>
-    <P>  coon.commit()</P>
-    <P>  coon.close()</P>
-
-    <P> def readRows():</P>
-    <P> coon = sql.connect("autoconocimiento.db")</P>
-    <P> cursor = coon.cursor()</P>
-    <P> instruccion =  f"SELECT * FROM progress_tracking"</P>
-    <P> cursor.execute(instruccion)</P>
-    <P> datos = cursor.fetchall()</P>
-    <P> coon.commit()</P>
-    <P> coon.close()</P>
-    <P> print(datos)</P>
-        <img src="segunda.JPG" alt="300">
-    <p1>    def insertRows(progress_trackingList):</p1>
-    <p1>   coon = sql.connect("autoconocimiento.db")</p1>
-    <p1>  cursor = coon.cursor()</p1>
-    <p1>     instruccion = """</p1>
-    <p1>    INSERT INTO progress_tracking (experience_id, experience_type, milestone, completion_percentage, notes)</p1>
-    <p1>   VALUES (?, ?, ?, ?, ?)</p1>
-    <p1>     """</p1>
-    <p1>    for row in progress_trackingList:</p1>
-    <p1>    try:</p1>
-    <p1>           cursor.execute(instruccion, row)  # Ejecutar el INSERT para cada fila</p1>
-    <p1>      except Exception as e:</p1>
-    <p1>           print(f"Error al insertar la fila {row}: {e}")</p1>
-        
-    <p1>     coon.commit()</p1>
-    <p1>     coon.close()</p1>
-        
-    <p1> def Buscar():</p1>
-    <p1>   coon = sql.connect("autoconocimiento.db")</p1>
-    <p1>   cursor = coon.cursor()</p1>
-    <p1>   instruccion =  f"SELECT * FROM progress_tracking WHERE experience_id = 1234"</p1>
-    <p1>   cursor.execute(instruccion)</p1>
-    <p1>   datos = cursor.fetchall()</p1>
-    <p1>   coon.commit()</p1>
-    <p1>   coon.close()</p1>
-    <p1>   print(datos)</p1>
+    <h1>Parcial 3 de Progress Tracking</h1>
     
-    <p1> if __name__ == "__main__":</p1>
-    <p1>    #createDB()</p1>
-    <p1>    #createTable()</p1>
-    <p1>    #insertRow(1234,"growth", "buena app", 50, "bien")</p1>
-    <p1>    #readRows()</p1>
-    <p1>    #Buscar()</p1>
-    <p1>    progress_tracking = [</p1>
-    <p1>        (987,'contribution', 'mala app',30,'mal'),</p1>
-    <p1>        (567,'contribution', 'exelente app',90,'bien'),</p1>
-    <p1>        (678,'contribution', 'buenisima app',30,'buenisisma')</p1>
-    <p1>    ]</p1>
-    <p1>    insertRows(progress_tracking)</p1>
-  <img src="tercera.JPG" alt="">
-    <p> por ultimo podemos visualizar la tabla con los datos agregados <tr>
-        ejecutandola desde la terminal, que esta en la esquina inferior izquierda</p>
- <img src="ultima.JPG" alt="">
+    <p>crear base de datos y tabla</p>
+    <pre>
+def createDB():
+    conn = sql.connect("autoconocimiento.db")
+    print("Base de datos autoconocimiento creada")
+    conn.commit()
+    conn.close()
 
+def createTable():
+    conn = sql.connect("autoconocimiento.db")
+    cursor = conn.cursor()
+    cursor.execute(""" 
+    CREATE TABLE progress_tracking (
+        tracking_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        experience_id INTEGER,
+        experience_type TEXT,  -- 'growth' or 'contribution'
+        milestone TEXT,
+        completion_percentage INTEGER DEFAULT 0,
+        notes TEXT,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (experience_id) REFERENCES growth_experiences(growth_id)
+    ); 
+    """)
+    print("Tabla creada")
+    conn.commit()
+    conn.close()
 
+    <img src="primer.JPG" alt="Imagen 1" width="300">
+    </pre>
+
+    <p>Para más detalles, consulta la terminal.</p>
+
+    <h2>Insertar datos y leer :</h2>
+    <pre>
+def insertRow(id_experiencia, tipo_experiencia, experiencia, porcentaje, notas):
+    conn = sql.connect("autoconocimiento.db")
+    cursor = conn.cursor()
+    instruccion = """
+    INSERT INTO progress_tracking 
+    (experience_id, experience_type, milestone, completion_percentage, notes) 
+    VALUES (?, ?, ?, ?, ?)
+    """
+    cursor.execute(instruccion, (id_experiencia, tipo_experiencia, experiencia, porcentaje, notas))
+    conn.commit()
+    conn.close()
+
+def readRows():
+    conn = sql.connect("autoconocimiento.db")
+    cursor = conn.cursor()
+    instruccion = "SELECT * FROM progress_tracking"
+    cursor.execute(instruccion)
+    datos = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    print(datos)
+    </pre>
+
+    <img src="segunda.JPG" alt="Imagen 2" width="300">
+
+    <h2>Insertar datos multiples y buscar datos:</h2>
+    <pre>
+        def insertRows(progress_trackingList):
+        coon = sql.connect("autoconocimiento.db")
+        cursor = coon.cursor()
+        instruccion = """
+        INSERT INTO progress_tracking (experience_id, experience_type, milestone, completion_percentage, notes)
+        VALUES (?, ?, ?, ?, ?)
+        """
+        for row in progress_trackingList:
+            try:
+                cursor.execute(instruccion, row)  # Ejecutar el INSERT para cada fila
+            except Exception as e:
+                print(f"Error al insertar la fila {row}: {e}")
+        
+        coon.commit()
+        coon.close()
+        
+    def Buscar():
+        coon = sql.connect("autoconocimiento.db")
+        cursor = coon.cursor()
+        instruccion =  f"SELECT * FROM progress_tracking WHERE experience_id = 1234"
+        cursor.execute(instruccion)
+        datos = cursor.fetchall()
+        coon.commit()
+        coon.close()
+        print(datos)
+    </pre>
     
+    
+    
+    <img src="tercera.JPG" alt="Imagen 3" width="300">
+    
+
+    <p>Por último, podemos visualizar la tabla con los datos agregados ejecutando la aplicación desde la terminal.</p>
+    <img src="ultima.JPG" alt="Imagen 4" width="300">
 </body>
 </html>
